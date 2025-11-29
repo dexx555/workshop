@@ -27,10 +27,12 @@ typedef struct etudiant {
 int main(){
     Etudiant *premiere=cree_etud("ahmed",17,15);
     Etudiant *deuxieme=cree_etud("smail",24,18);
+    Etudiant *troisieme=cree_etud("said",20,18)
     Etudiant *queue=cree_etud("houcine",21,18);
     Etudiant *tete=premiere;
     premiere->suivant=deuxieme;
-    deuxieme->suivant=queue;
+    deuxieme->suivant=troisieme;
+    troisieme->suivant=queue;
     queue->suivant=NULL;
     affichage(tete);
     return 0;
