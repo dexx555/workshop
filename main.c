@@ -9,7 +9,7 @@ typedef struct etudiant {
 }Etudiant;
     Etudiant *cree_etud (char nom[] , int age , int moyenne){
         Etudiant *nouvu;
-        nouvu=(Etudiant*)malloc(sizeof(Etudiant));
+        nouvu=malloc(sizeof(Etudiant));
         strcpy(nouvu->nom,nom);
         nouvu->age=age;
         nouvu->moyenne=moyenne;
@@ -24,6 +24,15 @@ typedef struct etudiant {
         }
 
     }
+    int taill (Etudiant *tete){
+        int cmp=0;
+        Etudiant *couran=tete;
+        while(couran!=NULL){
+            couran=couran->suivant;
+            cmp++;
+        }
+        return cmp;
+    }
 int main(){
     Etudiant *premiere=cree_etud("ahmed",17,15);
     Etudiant *deuxieme=cree_etud("smail",24,18);
@@ -34,8 +43,12 @@ int main(){
     premiere->suivant=deuxieme;
     deuxieme->suivant=troisieme;
     troisieme->suivant=quatre;
-    quatre->suivant=quatre;
+    quatre->suivant=queue;
     queue->suivant=NULL;
     affichage(tete);
+    int tail=taill(tete);
+    printf("la taille de la listes est %d",tail);
     return 0;
-    }
+}
+
+
