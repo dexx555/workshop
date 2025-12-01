@@ -33,6 +33,15 @@ typedef struct etudiant {
         }
         return cmp;
     }
+    Etudiant *recherche(Etudiant *tete ,char nom[] ){
+        Etudiant *courant=tete;
+        while(courant!=NULL){
+            if (strcmp(courant->nom,nom)==0)
+            return courant;
+            courant=courant->suivant;
+    }
+    return NULL;
+    }
 int main(){
     Etudiant *premiere=cree_etud("ahmed",17,15);
     Etudiant *deuxieme=cree_etud("smail",24,18);
@@ -47,8 +56,14 @@ int main(){
     queue->suivant=NULL;
     affichage(tete);
     int tail=taill(tete);
-    printf("la taille de la listes est %d",tail);
+    printf("la taille de la listes est %d\n ",tail);
+    char nom[50];
+    printf("entre le nom de etudient a rechercher :");
+    gets(nom);
+    Etudiant *result=recherche(tete,nom);
+    if (result!=NULL)
+        printf("le nom de etudiant est exist %s et son age est %d et la moyenne est %d ",nom,result->age,result->moyenne);
+    else
+        printf("le nom de etudiant est untrovable ");
     return 0;
 }
-
-
