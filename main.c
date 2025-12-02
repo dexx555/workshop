@@ -2,35 +2,34 @@
 #include<stdlib.h>
 #include<string.h>
 /*creation de la liste chainee*/
-typedef struct etudiant {
-    char nom[10];
-    int age;
-    int moyenne;
-    struct etudiant *suivant;
+typedef struct taxi {
+    char modele[10];
+    int numero_de_plaque;
+    int etat;
+    struct taxi *suivant;
     /*allocation dynamiqeu de le neau*/
-}Etudiant;
-    Etudiant *cree_etud (char nom[] , int age , int moyenne){
-        Etudiant *nouvu;
-        nouvu=malloc(sizeof(Etudiant));
-        strcpy(nouvu->nom,nom);
-        nouvu->age=age;
-        nouvu->moyenne=moyenne;
+}Taxi;
+    Etudiant *cree_taxi (char modele[] , int numero_de_plaque , int etat){
+        Taxi *nouv=malloc(sizeof(Taxi));
+        strcpy(nouvu->modele,modele);
+        nouvu->numero_de_plaque=numero_de_plaque;
+        nouvu->etat=etat;
         nouvu->suivant=NULL;
         return nouvu;
     }
     /*affichage de la liste chainee*/
-    void affichage (Etudiant *tete){
-        Etudiant *courant=tete;
+    void affichage (Taxi *tete){
+        Taxi *courant=tete;
         while(courant!=NULL){
-            printf(" %s -> %d -> %d \n ",courant->nom , courant->age , courant->moyenne);
+            printf(" %s -> %d -> %d \n ",courant->modele , courant->numero_de_plaque , courant->etat);
             courant=courant->suivant;
         }
 
     }
     /*la taill de la liste chainee*/
-    int taill (Etudiant *tete){
+    int taill (Taxi *tete){
         int cmp=0;
-        Etudiant *couran=tete;
+        Taxi *couran=tete;
         while(couran!=NULL){
             couran=couran->suivant;
             cmp++;
@@ -38,10 +37,10 @@ typedef struct etudiant {
         return cmp;
     }
     /*recherche dans de la liste chainee*/
-    Etudiant *recherche(Etudiant *tete ,char nom[] ){
-        Etudiant *courant=tete;
+    Etudiant *recherche(Taxi *tete ,int numero_de_plaque){
+        Taxi *courant=tete;
         while(courant!=NULL){
-            if (strcmp(courant->nom,nom)==0)
+            if (courant->numero_de_plaque==numero_de_plaque)
             return courant;
             courant=courant->suivant;
     }
