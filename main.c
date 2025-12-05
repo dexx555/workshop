@@ -3,7 +3,7 @@
 #include<string.h>
 /*////listes simplement chainee////*/
 
-/*creation de la liste chainee*/
+/*creation de la liste*/
 typedef struct taxi {
     char modele[10];
     int numero_de_plaque;
