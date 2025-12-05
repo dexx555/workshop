@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+/*////listes simplement chainee////*/
+
 /*creation de la liste chainee*/
 typedef struct taxi {
     char modele[10];
