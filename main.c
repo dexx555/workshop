@@ -20,18 +20,18 @@ typedef struct etudiant {
         return nouvu;
     }
     /*affichage de la liste chainee*/
-    void affichage (Taxi *tete){
-        Taxi *courant=tete;
+    void affichage (Etudiant *tete){
+        Etudiant *courant=tete;
         while(courant!=NULL){
-            printf(" %s -> %d -> %d \n ",courant->modele , courant->numero_de_plaque , courant->etat);
+            printf(" %s -> %d -> %d \n ",courant->nom , courant->age , courant->moyenne);
             courant=courant->suivant;
         }
 
     }
     /*la taill de la liste chainee*/
-    int taill (Taxi *tete){
+    int taill (Etudiant *tete){
         int cmp=0;
-        Taxi *couran=tete;
+        Etudiant *couran=tete;
         while(couran!=NULL){
             couran=couran->suivant;
             cmp++;
@@ -39,10 +39,10 @@ typedef struct etudiant {
         return cmp;
     }
     /*recherche dans de la liste chainee*/
-    Etudiant *recherche(Taxi *tete ,int numero_de_plaque){
-        Taxi *courant=tete;
+    Etudiant *recherche(Etudiant *tete ,int age){
+        Etudiant *courant=tete;
         while(courant!=NULL){
-            if (courant->numero_de_plaque==numero_de_plaque)
+            if (courant->age==age)
             return courant;
             courant=courant->suivant;
     }
