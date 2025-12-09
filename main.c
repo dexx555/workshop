@@ -51,13 +51,7 @@ typedef struct etudiant {
     /*ajout ou debut*/
     /*nouvnoeud->suivant=premier;*/
     Etudiant *ajout_debut(Etudiant *tete , char nom[] , int age , int moyenne){
-        Etudiant *Nouvnoeud;
-        Nouvnoeud=malloc(sizeof(Etudiant));
-         strcpy(Nouvnoeud->nom,nom);
-        Nouvnoeud->age=age;
-        Nouvnoeud->moyenne=moyenne;
-        Nouvnoeud->suivant=NULL;
-        if (tete!=NULL)
+        Etudiant *Nouvnoeud=cree_etud(char nom[] , int age , int moyenne);
             Nouvnoeud->suivant=tete;
             tete=Nouvnoeud;
 
