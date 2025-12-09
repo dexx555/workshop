@@ -4,18 +4,18 @@
 /*////listes simplement chainee////*/
 
 /*creation de la liste*/
-typedef struct taxi {
-    char modele[10];
-    int numero_de_plaque;
-    int etat;
-    struct taxi *suivant;
+typedef struct etudiant {
+    char nom[10];
+    int age;
+    int moyenne
+    struct etudiant *suivant;
     /*allocation dynamiqeu de le neau*/
-}Taxi;
-    Etudiant *cree_taxi (char modele[] , int numero_de_plaque , int etat){
-        Taxi *nouv=malloc(sizeof(Taxi));
-        strcpy(nouvu->modele,modele);
-        nouvu->numero_de_plaque=numero_de_plaque;
-        nouvu->etat=etat;
+}Etudiant;
+    Etudiant *cree_etud (char nom[] , int age , int moyenne){
+        Taxi *nouv=malloc(sizeof(Etudiant));
+        strcpy(nouvu->nom,nom);
+        nouvu->age=age;
+        nouvu->moyenne=moyenne;
         nouvu->suivant=NULL;
         return nouvu;
     }
@@ -50,7 +50,7 @@ typedef struct taxi {
     }
     /*ajout ou debut*/
     /*nouvnoeud->suivant=premier;*/
-    Etudiant *ajout(Etudiant *tete , char nom[] , int age , int moyenne){
+    Etudiant *ajout_debut(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud;
         Nouvnoeud=malloc(sizeof(Etudiant));
          strcpy(Nouvnoeud->nom,nom);
@@ -63,6 +63,8 @@ typedef struct taxi {
 
         return tete;
     }
+    /*insertion a la fin */
+    ajout_fin()
 int main(){
     Etudiant *premiere=cree_etud("ahmed",17,15);
     Etudiant *deuxieme=cree_etud("smail",24,18);
