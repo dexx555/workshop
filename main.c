@@ -12,7 +12,7 @@ typedef struct etudiant {
     /*allocation dynamiqeu de le neau*/
 }Etudiant;
     Etudiant *cree_etud (char nom[] , int age , int moyenne){
-        Taxi *nouv=malloc(sizeof(Etudiant));
+        Etudiant *nouv=malloc(sizeof(Etudiant));
         strcpy(nouvu->nom,nom);
         nouvu->age=age;
         nouvu->moyenne=moyenne;
