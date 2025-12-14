@@ -7,12 +7,12 @@
 typedef struct etudiant {
     char nom[10];
     int age;
-    int moyenne
+    int moyenne;
     struct etudiant *suivant;
     /*allocation dynamiqeu de le neau*/
 }Etudiant;
     Etudiant *cree_etud (char nom[] , int age , int moyenne){
-        Etudiant *nouv=malloc(sizeof(Etudiant));
+        Etudiant *nouvu=malloc(sizeof(Etudiant));
         strcpy(nouvu->nom,nom);
         nouvu->age=age;
         nouvu->moyenne=moyenne;
@@ -39,10 +39,10 @@ typedef struct etudiant {
         return cmp;
     }
     /*recherche dans de la liste chainee*/
-    Etudiant *recherche(Etudiant *tete ,int age){
+    Etudiant *recherche(Etudiant *tete ,char nom[]){
         Etudiant *courant=tete;
         while(courant!=NULL){
-            if (courant->age==age)
+            if (strcmp(courant->nom,nom)==0)
             return courant;
             courant=courant->suivant;
     }
@@ -51,31 +51,38 @@ typedef struct etudiant {
     /*ajout ou debut*/
     /*nouvnoeud->suivant=premier;*/
     Etudiant *ajout_debut(Etudiant *tete , char nom[] , int age , int moyenne){
-        Etudiant *Nouvnoeud=cree_etud(char nom[] , int age , int moyenne);
+        Etudiant *Nouvnoeud=cree_etud(nom,age ,moyenne);
             Nouvnoeud->suivant=tete;
             tete=Nouvnoeud;
 
         return tete;
     }
     /*insertion a la fin */
-    ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
-        Etudiant *Nouvnoeud=cree_etud(char nom[] , int age , int moyenne);
+    Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
+        Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
         if (tete==NULL)
         tete=NULL;
     return tete;
     Etudiant *courant=tete;
     while(courant->suivant!=NULL)
-    courant=courant-suivant;
-    courant-suivant=Nouvnoeud;
+    courant=courant->suivant;
+    courant->suivant=Nouvnoeud;
+    printf("entre le nom de etudiant :");
+    gets(courant->nom);
+    printf("entre age de etudiant ");
+    scanf("%d",courant->age);
+    printf("entre le moyenne de etudiant :");
+    scanf("%d",courant->moyenne);
     return tete;
     }
 int main(){
-    tete=ajout(tete,"kamal",19,11);
-    tete=ajout(tete,"ahmed",17,15);
-    tete=ajout(tete,"smail",24,18);
-    tete=ajout(tete,"said",20,18);
-    tete=ajout(tete,"karim",20,14);
-    tete=ajout(tete,"houcine",21,18);
+    Etudiant *tete;
+    tete=ajout_debut(tete,"kamal",19,11);
+    tete=ajout_debut(tete,"ahmed",17,15);
+    tete=ajout_debut(tete,"smail",24,18);
+    tete=ajout_debut(tete,"said",20,18);
+    tete=ajout_debut(tete,"karim",20,14);
+    tete=ajout_debut(tete,"houcine",21,18);
     affichage(tete);
     int tail=taill(tete);
     printf("la taille de la listes est %d\n ",tail);
