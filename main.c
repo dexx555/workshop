@@ -58,20 +58,24 @@ typedef struct etudiant {
         return tete;
     }
     /*insertion a la fin */
-    ajout_fin()
+    ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
+        Etudiant *Nouvnoeud=cree_etud(char nom[] , int age , int moyenne);
+        if (tete==NULL)
+        tete=NULL;
+    return tete;
+    Etudiant *courant=tete;
+    while(courant->suivant!=NULL)
+    courant=courant-suivant;
+    courant-suivant=Nouvnoeud;
+    return tete;
+    }
 int main(){
-    Etudiant *premiere=cree_etud("ahmed",17,15);
-    Etudiant *deuxieme=cree_etud("smail",24,18);
-    Etudiant *troisieme=cree_etud("said",20,18);
-    Etudiant *quatre=cree_etud("karim",20,14);
-    Etudiant *queue=cree_etud("houcine",21,18);
-    Etudiant *tete=premiere;
-    premiere->suivant=deuxieme;
-    deuxieme->suivant=troisieme;
-    troisieme->suivant=quatre;
-    quatre->suivant=queue;
-    queue->suivant=NULL;
     tete=ajout(tete,"kamal",19,11);
+    tete=ajout(tete,"ahmed",17,15);
+    tete=ajout(tete,"smail",24,18);
+    tete=ajout(tete,"said",20,18);
+    tete=ajout(tete,"karim",20,14);
+    tete=ajout(tete,"houcine",21,18);
     affichage(tete);
     int tail=taill(tete);
     printf("la taille de la listes est %d\n ",tail);
