@@ -65,7 +65,9 @@ typedef struct etudiant {
         prec=courant;
         courant=courant->suivant;
         }
-        prec
+        prec->suivant=courant->suivant;
+        free(courant);
+        return tete;
     }
     /*affichage de la liste chainee*/
     void affichage (Etudiant *tete){
@@ -95,6 +97,7 @@ int main(){
          printf("1: ajout au debut \n");
          printf("2: ajout a la fin \n");
          printf("3: recherche dun element \n");
+         printf("4: supprime le dernier element de la list \n");
          printf("4: afichage de tout les etudiant \n");
          printf("5: la taill de la laist  \n");
          printf("6: exit \n");
@@ -132,6 +135,11 @@ int main(){
                 else
                     printf("le nom de etudiant est untrovable \n ");
             break;
+     case 4:
+             printf("entre le nom de etudient a suprime :");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             suppfin(tete);
      case 4:
              affichage(tete);
             break;
