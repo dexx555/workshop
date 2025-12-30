@@ -60,10 +60,12 @@ typedef struct etudiant {
             return NULL;
         }
         Etudiant *prec;
+        courant=courant->suivant;
         while(courant && strcmp(courant->nom,nom)!=0){
         prec=courant;
         courant=courant->suivant;
         }
+        prec
     }
     /*affichage de la liste chainee*/
     void affichage (Etudiant *tete){
