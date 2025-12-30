@@ -49,7 +49,22 @@ typedef struct etudiant {
     }
     return NULL;
     }
-
+    Etudiant *suppfin(Etudiant *tete , char nom[]){
+        if(tete==NULL){
+        printf("la list est vide");
+        return NULL;
+        }
+        Etudiant *courant=tete;
+        if(courant->suivant==NULL){
+            free(courant);
+            return NULL;
+        }
+        Etudiant *prec;
+        while(courant && strcmp(courant->nom,nom)!=0){
+        prec=courant;
+        courant=courant->suivant;
+        }
+    }
     /*affichage de la liste chainee*/
     void affichage (Etudiant *tete){
         Etudiant *courant=tete;
