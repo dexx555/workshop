@@ -59,8 +59,8 @@ typedef struct etudiant {
             free(courant);
             return NULL;
         }
-        Etudiant *prec;
-        courant=courant->suivant;
+        Etudiant *prec=tete;
+        courant=tete->suivant;
         while(courant && strcmp(courant->nom,nom)!=0){
         prec=courant;
         courant=courant->suivant;
