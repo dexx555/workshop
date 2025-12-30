@@ -49,7 +49,7 @@ typedef struct etudiant {
     }
     return NULL;
     }
-    Etudiant *suppfin(Etudiant *tete , char nom[]){
+    Etudiant *suppfin(Etudiant *tete){
         if(tete==NULL){
         printf("la list est vide");
         return NULL;
@@ -61,12 +61,22 @@ typedef struct etudiant {
         }
         Etudiant *prec=tete;
         courant=tete->suivant;
-        while(courant && strcmp(courant->nom,nom)!=0){
+        while(courant->suivant!=NULL){
         prec=courant;
         courant=courant->suivant;
         }
         prec->suivant=courant->suivant;
         free(courant);
+        return tete;
+    }
+    Etudiant *suppdebut(Etudiant *tete){
+        if(tete==NULL){
+        printf("la list est vide");
+        return NULL;
+        }
+        Etudiant *tmp=tete;
+        tete=tete->suivant;
+        free(tmp);
         return tete;
     }
     /*affichage de la liste chainee*/
@@ -98,9 +108,9 @@ int main(){
          printf("2: ajout a la fin \n");
          printf("3: recherche dun element \n");
          printf("4: supprime le dernier element de la list \n");
-         printf("4: afichage de tout les etudiant \n");
-         printf("5: la taill de la laist  \n");
-         printf("6: exit \n");
+         printf("5: afichage de tout les etudiant \n");
+         printf("6: la taill de la laist  \n");
+         printf("7: exit \n");
          printf("choix: ");
          scanf("%d",&c);
          getchar();
@@ -136,24 +146,22 @@ int main(){
                     printf("le nom de etudiant est untrovable \n ");
             break;
      case 4:
-             printf("entre le nom de etudient a suprime :");
-             fgets(nom_,50,stdin);
-             nom_[strcspn(nom_,"\n")]=0;
-             suppfin(tete);
-     case 4:
-             affichage(tete);
+             tete=suppfin(tete);
             break;
      case 5:
+             affichage(tete);
+            break;
+     case 6:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
             break;
-     case 6:
+     case 7:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=6);
+    }while(c!=7);
 
     return 0;
 }
