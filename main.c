@@ -79,6 +79,33 @@ typedef struct etudiant {
         free(tmp);
         return tete;
     }
+    Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
+        if(tete==NULL || tete->suivant==NULL){
+        printf("la list est vide ou aucun a supprimer");
+        return NULL;
+        }
+        Etudiant *courant=tete;
+        if(strcmp(tete->nom,nom)==0){
+            printf("aucun avant a supprimer");
+            return tete;
+        }
+        Etudiant *avprec=NULL;
+        Etudiant *prec=tete;
+        courant=tete->suivant;
+        while(courant && strcmp(courant->nom,nom)!=0){
+            avprec=prec;
+            prec=courant;
+            courant=courant->suivant;
+        }
+        if(avprec==NULL)
+            printf("le noeud est introuvable \n");
+        else{
+            avprec->suivant=prec->suivant;
+            free(prec);            
+        }
+        
+        return tete;
+    }
     Etudiant *supp_un_noeud(Etudiant *tete , char nom[]){
         if(tete==NULL){
         printf("la list est vide");
