@@ -79,6 +79,31 @@ typedef struct etudiant {
         free(tmp);
         return tete;
     }
+    Etudiant *supp_un_noeud(Etudiant *tete , char nom[]){
+        if(tete==NULL){
+        printf("la list est vide");
+        return NULL;
+        }
+        Etudiant *courant=tete;
+        if(courant->suivant==NULL){
+            free(courant);
+            return NULL;
+        }
+        Etudiant *prec=tete;
+        courant=tete->suivant;
+        while(courant && strcmp(courant->nom,nom)!=0){
+            prec=courant;
+            courant=courant->suivant;
+        }
+        if(courant==NULL)
+            printf("le noeud est introuvable \n");
+        else{
+            prec->suivant=courant->suivant;
+            free(courant);            
+        }
+        
+        return tete;
+    }
     /*affichage de la liste chainee*/
     void affichage (Etudiant *tete){
         Etudiant *courant=tete;
@@ -108,9 +133,11 @@ int main(){
          printf("2: ajout a la fin \n");
          printf("3: recherche dun element \n");
          printf("4: supprime le dernier element de la list \n");
-         printf("5: afichage de tout les etudiant \n");
-         printf("6: la taill de la laist  \n");
-         printf("7: exit \n");
+         printf("5: supprime le debut element de la list \n");
+         printf("6: supprime un noeud donne de la list \n");
+         printf("7: afichage de tout les etudiant \n");
+         printf("8: la taill de la laist  \n");
+         printf("9: exit \n");
          printf("choix: ");
          scanf("%d",&c);
          getchar();
@@ -149,19 +176,28 @@ int main(){
              tete=suppfin(tete);
             break;
      case 5:
-             affichage(tete);
+             tete=suppdebut(tete);
             break;
      case 6:
+             printf("entre le nom de etudient a rechercher :");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             tete=supp_un_noeud(tete , nom_);
+            break;
+     case 7:
+             affichage(tete);
+            break;
+     case 8:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
             break;
-     case 7:
+     case 9:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=7);
+    }while(c!=9);
 
     return 0;
 }
