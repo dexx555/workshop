@@ -86,8 +86,9 @@ typedef struct etudiant {
         }
         Etudiant *courant=tete;
         if(strcmp(courant->nom,nom)==0){
+            tete=tete->suivant;
             free(courant);
-            return NULL;
+            return tete;
         }
         Etudiant *prec=tete;
         courant=tete->suivant;
