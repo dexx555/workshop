@@ -85,7 +85,7 @@ typedef struct etudiant {
         return NULL;
         }
         Etudiant *courant=tete;
-        if(courant->suivant==NULL){
+        if(strcmp(courant->nom,nom)==0){
             free(courant);
             return NULL;
         }
@@ -179,7 +179,7 @@ int main(){
              tete=suppdebut(tete);
             break;
      case 6:
-             printf("entre le nom de etudient a rechercher :");
+             printf("entre le nom de etudient a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
              tete=supp_un_noeud(tete , nom_);
