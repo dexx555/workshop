@@ -2,7 +2,6 @@
 #include<stdlib.h>
 #include<string.h>
 /*////listes simplement chainee circulaire////*/
-
 /*creation de la liste*/
 typedef struct etudiant {
     char nom[10];
@@ -43,6 +42,43 @@ typedef struct etudiant {
         nouvu->suivant=tete;
         return tete;
     }
+    Etudiant *suppdebut(Etudiant *tete){
+        if(tete==NULL){
+            printf("la list est vide");
+        return NULL;
+        }
+        if(tete->suivant ==tete){
+            free(tete);
+            return NULL;
+        }
+        Etudiant *courant=tete;
+        while(courant->suivant!=tete){
+            courant=courant->suivant;
+        }
+        Etudiant *nouvtete=tete->suivant;
+        courant->suivant=nouvtete;
+        free(tete);
+        return nouvtete;
+    }
+    Etudiant *suppfin(Etudiant *tete){
+        if(tete==NULL){
+            printf("la list est vide");
+        return NULL;
+        }
+        if(tete->suivant ==tete){
+            free(tete);
+            return NULL;
+        }
+        Etudiant *prec=tete;
+        Etudiant *courant=tete->suivant;
+        while(courant->suivant!=tete){
+            prec=courant;
+            courant=courant->suivant;
+        }
+        prec->suivant=tete;
+        free(courant);
+        return tete;
+    }
     void affichage (Etudiant *tete){
         Etudiant *courant=tete;
         do{
@@ -60,8 +96,10 @@ int main(){
          printf("\n ====MENU==== \n");
          printf("1: ajout au debut \n");
          printf("2: ajout a la fin \n");
-         printf("3: aficher la list \n");
-         printf("4: quite \n");
+         printf("3: suppression au debut \n");
+         printf("4: suppression a la fin \n");
+         printf("5: aficher la list \n");
+         printf("6: quite \n");
          printf("choix: ");
          scanf("%d",&c);
          getchar();
@@ -79,16 +117,22 @@ int main(){
              tete=ajout_fin(tete ,nom_);
             break;
      case 3:
-             affichage(tete);
+             tete=suppdebut(tete);
             break;
      case 4:
+             tete=suppfin(tete);
+            break;
+     case 5:
+             affichage(tete);
+            break;
+     case 6:
              printf("====arrivederci====");
             break;
 
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=4);
+    }while(c!=6);
 
 
     return 0;
