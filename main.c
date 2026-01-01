@@ -97,13 +97,17 @@ typedef struct etudiant {
             prec=courant;
             courant=courant->suivant;
         }
-        if(avprec==NULL)
-            printf("le noeud est introuvable \n");
-        else{
-            avprec->suivant=prec->suivant;
-            free(prec);            
+        if(!courant){
+            printf("le noeud a suprimer untrovable \n");
         }
-        
+
+        if(avprec==NULL)
+            tete=tete->suivant;
+        else{
+            avprec->suivant=prec->suivant;           
+        }
+        printf("le noeud avant le noeud donnes %s est supprimer", courant->nom);
+        free(prec);
         return tete;
     }
     Etudiant *supp_un_noeud(Etudiant *tete , char nom[]){
@@ -163,9 +167,10 @@ int main(){
          printf("4: supprime le dernier element de la list \n");
          printf("5: supprime le debut element de la list \n");
          printf("6: supprime un noeud donne de la list \n");
-         printf("7: afichage de tout les etudiant \n");
-         printf("8: la taill de la laist  \n");
-         printf("9: exit \n");
+         printf("7: supprime un noeud avant le noeud donnes de la list \n");
+         printf("8: afichage de tout les etudiant \n");
+         printf("9: la taill de la laist  \n");
+         printf("10: exit \n");
          printf("choix: ");
          scanf("%d",&c);
          getchar();
@@ -213,19 +218,25 @@ int main(){
              tete=supp_un_noeud(tete , nom_);
             break;
      case 7:
-             affichage(tete);
+             printf("entre le nom de etudient avant a supprimer :");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             tete=supp_avant_noeud(tete , nom_);
             break;
      case 8:
+             affichage(tete);
+            break;
+     case 9:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
             break;
-     case 9:
+     case 10:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=9);
+    }while(c!=10);
 
     return 0;
 }
