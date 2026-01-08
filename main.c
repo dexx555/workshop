@@ -35,7 +35,8 @@ typedef struct etudiant {
     Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
         if (tete==NULL)
-            return Nouvnoeud;
+            tete=nouvnoeud
+            return tete;
     Etudiant *courant=tete;
     while(courant->suivant!=NULL)
         courant=courant->suivant;
@@ -63,13 +64,11 @@ typedef struct etudiant {
             free(courant);
             return NULL;
         }
-        Etudiant *prec=tete;
         courant=tete->suivant;
         while(courant->suivant!=NULL){
-        prec=courant;
         courant=courant->suivant;
         }
-        prec->suivant=courant->suivant;
+        courant->pre->suivant=courant->suivant;
         free(courant);
         return tete;
     }
@@ -80,10 +79,12 @@ typedef struct etudiant {
         }
         Etudiant *tmp=tete;
         tete=tete->suivant;
+        if(tete!=NULL)
+        tete->pre=NULL;
         free(tmp);
         return tete;
     }
-    Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
+    /*Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
         if(tete==NULL || tete->suivant==NULL){
         printf("la list est vide ou aucun a supprimer");
         return NULL;
@@ -215,7 +216,7 @@ int main(){
      case 5:
              tete=suppdebut(tete);
             break;
-     case 6:
+     /*case 6:
              printf("entre le nom de etudient a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
@@ -233,14 +234,14 @@ int main(){
      case 9:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
-            break;
-     case 10:
+            break;*/
+     case 6:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=10);
+    }while(c!=6);
 
     return 0;
 }
