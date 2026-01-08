@@ -27,19 +27,21 @@ typedef struct etudiant {
         Etudiant *Nouvnoeud=cree_etud(nom,age ,moyenne);
             Nouvnoeud->suivant=tete;
         if(tete!=NULL)
-            tete->prec=nouvnoeud;
+            tete->prec=Nouvnoeud;
             tete=Nouvnoeud;
         return tete;
     }
     /*insertion a la fin */
     Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
-        if (tete==NULL)
-            tete=nouvnoeud
+        if (tete==NULL){
+            tete=Nouvnoeud;
             return tete;
+        }
     Etudiant *courant=tete;
-    while(courant->suivant!=NULL)
+    while(courant->suivant!=NULL){
         courant=courant->suivant;
+    }
         courant->suivant=Nouvnoeud;
         Nouvnoeud->prec=courant;
     return tete;
@@ -68,7 +70,7 @@ typedef struct etudiant {
         while(courant->suivant!=NULL){
         courant=courant->suivant;
         }
-        courant->pre->suivant=courant->suivant;
+        courant->prec->suivant=NULL;
         free(courant);
         return tete;
     }
@@ -80,7 +82,7 @@ typedef struct etudiant {
         Etudiant *tmp=tete;
         tete=tete->suivant;
         if(tete!=NULL)
-        tete->pre=NULL;
+        tete->prec=NULL;
         free(tmp);
         return tete;
     }
@@ -100,11 +102,13 @@ typedef struct etudiant {
         }
         if(!courant){
             printf("le noeud a suprimer untrovable \n");
+            return tete;
         }
         Etudiant *a_suppri=courant->prec;
-        if(a_suppri==NULL){
+        if(a_suppri==tete){
             tete=tete->suivant;
             tete->prec=NULL;
+            return tete;
         }
         else{
             a_suppri->prec->suivant=courant;
@@ -114,27 +118,28 @@ typedef struct etudiant {
         free(a_suppri);
         return tete;
     }
-    Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
+    Etudiant *supp_apres_noeud(Etudiant *tete , char nom[]){
         if(tete==NULL){
         printf("la list est vide");
         return NULL;
         }
-        courant=tete->suivant;
+        Etudiant *courant=tete;
         while(courant && strcmp(courant->nom,nom)!=0){
             courant=courant->suivant;
         }
         if(!courant){
             printf("le noeud a suprimer untrovable \n");
+            return tete;
         }
-        Etudiant *a_suppri=courant->prec;
+        Etudiant *a_suppri=courant->suivant;
         if(!courant->suivant){
             printf("aucun apres a supprimer");
-            return NULL;
+            return tete;
         }
-        else{
-            a_suppri->prec->suivant=courant;
-            courant->prec=a_suppri->prec;
-        }
+            courant->suivant=a_suppri->suivant;
+            if(a_suppri->suivant==NULL){
+                a_suppri->suivant->prec=courant;
+            }
         printf("le noeud avant le noeud donnes %s est supprimer", courant->nom);
         free(a_suppri);
         return tete;
@@ -147,22 +152,26 @@ typedef struct etudiant {
         Etudiant *courant=tete;
         if(strcmp(courant->nom,nom)==0){
             tete=tete->suivant;
+            if(tete!=NULL)
+                tete->prec=NULL;
             free(courant);
             return tete;
         }
-        Etudiant *prec=tete;
         courant=tete->suivant;
         while(courant && strcmp(courant->nom,nom)!=0){
-            prec=courant;
             courant=courant->suivant;
         }
-        if(courant==NULL)
-            printf("le noeud est introuvable \n");
-        else{
-            prec->suivant=courant->suivant;
-            free(courant);            
+        if(courant==NULL){
+                printf("le noeud est introuvable \n");
+            return tete;
         }
-        
+        else{
+            courant->prec->suivant=courant->suivant;
+            if(courant->suivant!=NULL)
+                courant->suivant->prec=courant->prec;
+            free(courant);
+        }
+
         return tete;
     }
     /*affichage de la liste chainee*/
@@ -240,7 +249,7 @@ int main(){
      case 5:
              tete=suppdebut(tete);
             break;
-     /*case 6:
+     case 6:
              printf("entre le nom de etudient a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
@@ -258,14 +267,14 @@ int main(){
      case 9:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
-            break;*/
-     case 6:
+            break;
+     case 10:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=6);
+    }while(c!=10);
 
     return 0;
 }
