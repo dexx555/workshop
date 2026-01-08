@@ -84,7 +84,7 @@ typedef struct etudiant {
         free(tmp);
         return tete;
     }
-    /*Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
+    Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
         if(tete==NULL || tete->suivant==NULL){
         printf("la list est vide ou aucun a supprimer");
         return NULL;
@@ -94,25 +94,49 @@ typedef struct etudiant {
             printf("aucun avant a supprimer");
             return tete;
         }
-        Etudiant *avprec=NULL;
-        Etudiant *prec=tete;
         courant=tete->suivant;
         while(courant && strcmp(courant->nom,nom)!=0){
-            avprec=prec;
-            prec=courant;
             courant=courant->suivant;
         }
         if(!courant){
             printf("le noeud a suprimer untrovable \n");
         }
-
-        if(avprec==NULL)
+        Etudiant *a_suppri=courant->prec;
+        if(a_suppri==NULL){
             tete=tete->suivant;
+            tete->prec=NULL;
+        }
         else{
-            avprec->suivant=prec->suivant;           
+            a_suppri->prec->suivant=courant;
+            courant->prec=a_suppri->prec;
         }
         printf("le noeud avant le noeud donnes %s est supprimer", courant->nom);
-        free(prec);
+        free(a_suppri);
+        return tete;
+    }
+    Etudiant *supp_avant_noeud(Etudiant *tete , char nom[]){
+        if(tete==NULL){
+        printf("la list est vide");
+        return NULL;
+        }
+        courant=tete->suivant;
+        while(courant && strcmp(courant->nom,nom)!=0){
+            courant=courant->suivant;
+        }
+        if(!courant){
+            printf("le noeud a suprimer untrovable \n");
+        }
+        Etudiant *a_suppri=courant->prec;
+        if(!courant->suivant){
+            printf("aucun apres a supprimer");
+            return NULL;
+        }
+        else{
+            a_suppri->prec->suivant=courant;
+            courant->prec=a_suppri->prec;
+        }
+        printf("le noeud avant le noeud donnes %s est supprimer", courant->nom);
+        free(a_suppri);
         return tete;
     }
     Etudiant *supp_un_noeud(Etudiant *tete , char nom[]){
