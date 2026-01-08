@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-/*////listes simplement chainee////*/
+/*////listes doublement chainee////*/
 
 /*creation de la liste*/
 typedef struct etudiant {
@@ -9,6 +9,7 @@ typedef struct etudiant {
     int age;
     int moyenne;
     struct etudiant *suivant;
+    struct etudiant *prec;
     /*allocation dynamiqeu de le neau*/
 }Etudiant;
     Etudiant *cree_etud (char nom[] , int age , int moyenne){
@@ -17,6 +18,7 @@ typedef struct etudiant {
         nouvu->age=age;
         nouvu->moyenne=moyenne;
         nouvu->suivant=NULL;
+        nouvu->prec=NULL;
         return nouvu;
     }
         /*ajout ou debut*/
@@ -24,14 +26,18 @@ typedef struct etudiant {
     Etudiant *ajout_debut(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age ,moyenne);
             Nouvnoeud->suivant=tete;
+        if(tete!=NULL)
+            tete->prec=nouvnoeud;
             tete=Nouvnoeud;
-
         return tete;
     }
     /*insertion a la fin */
     Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
-        if (tete==NULL)
+        if (tete==NULL){
+            printf("la liste est vide ");
+        return NULL;
+        }
     return Nouvnoeud;
     Etudiant *courant=tete;
     while(courant->suivant!=NULL)
