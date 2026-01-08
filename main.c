@@ -34,15 +34,13 @@ typedef struct etudiant {
     /*insertion a la fin */
     Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
-        if (tete==NULL){
-            printf("la liste est vide ");
-        return NULL;
-        }
-    return Nouvnoeud;
+        if (tete==NULL)
+            return Nouvnoeud;
     Etudiant *courant=tete;
     while(courant->suivant!=NULL)
-    courant=courant->suivant;
-    courant->suivant=Nouvnoeud;
+        courant=courant->suivant;
+        courant->suivant=Nouvnoeud;
+        Nouvnoeud->prec=courant;
     return tete;
     }
     /*recherche dans de la liste chainee*/
