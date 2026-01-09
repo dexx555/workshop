@@ -46,15 +46,19 @@ typedef struct etudiant {
         Nouvnoeud->prec=courant;
     return tete;
     }
-    /*recherche dans de la liste chainee*/
-    Etudiant *recherche(Etudiant *tete ,char nom[]){
-        Etudiant *courant=tete;
-        while(courant!=NULL){
-            if (strcmp(courant->nom,nom)==0)
-            return courant;
-            courant=courant->suivant;
+    Etudiant *ajout_avant_node(Etudiant *tete , char nom[] , int age , int moyenne){
+        Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
+        if (tete==NULL){
+            tete=Nouvnoeud;
+            return tete;
+        }
+    Etudiant *courant=tete;
+    while(courant->suivant!=NULL){
+        courant=courant->suivant;
     }
-    return NULL;
+        courant->suivant=Nouvnoeud;
+        Nouvnoeud->prec=courant;
+    return tete;
     }
     Etudiant *suppfin(Etudiant *tete){
         if(tete==NULL){
@@ -173,6 +177,16 @@ typedef struct etudiant {
         }
 
         return tete;
+    }
+    /*recherche dans de la liste chainee*/
+    Etudiant *recherche(Etudiant *tete ,char nom[]){
+        Etudiant *courant=tete;
+        while(courant!=NULL){
+            if (strcmp(courant->nom,nom)==0)
+            return courant;
+            courant=courant->suivant;
+    }
+    return NULL;
     }
     /*affichage de la liste chainee*/
     void affichage (Etudiant *tete){
