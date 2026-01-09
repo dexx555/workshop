@@ -252,14 +252,17 @@ int main(){
          printf("\n ====MENU==== \n");
          printf("1: ajout au debut \n");
          printf("2: ajout a la fin \n");
-         printf("3: recherche dun element \n");
-         printf("4: supprime le dernier element de la list \n");
-         printf("5: supprime le debut element de la list \n");
-         printf("6: supprime un noeud donne de la list \n");
-         printf("7: supprime un noeud avant le noeud donnes de la list \n");
-         printf("8: afichage de tout les etudiant \n");
-         printf("9: la taill de la laist  \n");
-         printf("10: exit \n");
+         printf("3: ajoute ce qui precede ce noeud \n");
+         printf("4: ajoute ce qui suit ce noeud \n");
+         printf("5: recherche dun element \n");
+         printf("6: supprime le dernier element de la list \n");
+         printf("7: supprime l premier element de la list \n");
+         printf("8: supprime un noeud donne de la list \n");
+         printf("9: supprime ce qui precede ce noeud \n");
+         printf("10: supprime ce qui suit ce noeud \n");
+         printf("11: afichage de tout les etudiant \n");
+         printf("12: la taill de la laist  \n");
+         printf("13: exit \n");
          printf("choix: ");
          scanf("%d",&c);
          getchar();
@@ -285,6 +288,29 @@ int main(){
              tete=ajout_fin(tete ,nom_ , age , moyenne);
             break;
      case 3:
+             printf("entre le nom de etudiant: ");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             tete=ajout_avant_node(tete ,nom_ , age , moyenne);
+             printf("entre le nom de etudiant: ");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             printf("entre age de etudiant: ");
+             scanf("%d",&age);
+             printf("entre moyenn de etudiant: ");
+             scanf("%d",&moyenne);
+            break;
+     case 4:
+             printf("entre le nom de etudiant: ");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             printf("entre age de etudiant: ");
+             scanf("%d",&age);
+             printf("entre moyenn de etudiant: ");
+             scanf("%d",&moyenne);
+             tete=ajout_fin(tete ,nom_ , age , moyenne);
+            break;
+     case 5:
              printf("entre le nom de etudient a rechercher :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
@@ -313,19 +339,25 @@ int main(){
              tete=supp_avant_noeud(tete , nom_);
             break;
      case 8:
-             affichage(tete);
+             printf("entre le nom de etudient avant a supprimer :");
+             fgets(nom_,50,stdin);
+             nom_[strcspn(nom_,"\n")]=0;
+             tete=supp_apres_noeud(tete , nom_);
             break;
      case 9:
+             affichage(tete);
+            break;
+     case 10:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
             break;
-     case 10:
+     case 11:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=10);
+    }while(c!=11);
 
     return 0;
 }
