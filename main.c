@@ -47,18 +47,50 @@ typedef struct etudiant {
     return tete;
     }
     Etudiant *ajout_avant_node(Etudiant *tete , char nom[] , int age , int moyenne){
-        Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
         if (tete==NULL){
+            printf("acun element avant a lajute");
+            return tete;
+        }
+        Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
+        if(strcmp(courant->nom,nom)==0){
+            Nouvnoeud->suivant=tete;
             tete=Nouvnoeud;
             return tete;
         }
-    Etudiant *courant=tete;
-    while(courant->suivant!=NULL){
-        courant=courant->suivant;
+        Etudiant *courant=tete->suivant;
+        while(courant && strcmp(courant->nom,nom)!=0){
+            courant=courant->suivant;
+        }
+        if(!courant){
+            printf("le noeud est untrovable \n");
+            return tete;
+        }
+        else{
+            prec->suivant=Nouvnoeud;
+            nouvnoeud->suivant=courant;
+        }
+        return tete;
     }
-        courant->suivant=Nouvnoeud;
-        Nouvnoeud->prec=courant;
-    return tete;
+    Etudiant *ajout_apre_node(Etudiant *tete , char nom[] , int age , int moyenne){
+         if(tete==NULL){
+        printf("aucun apres a ajute");
+        return tete;
+        }
+        Etudiant *courant=tete;
+        while(courant && strcmp(courant->nom,nom)!=0){
+            courant=courant->suivant;
+        }
+        if(!courant){
+            printf("le noeud est untrovable \n");
+            return NULL;
+        }
+        if(!courant->suivant)
+            printf("aucun apres a supprimer");
+        else{
+             Nouvnoeud->suivant=courant->suivant;
+             courant->suivant=Nouvnoeud;
+        }
+        return tete;
     }
     Etudiant *suppfin(Etudiant *tete){
         if(tete==NULL){
