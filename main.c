@@ -35,8 +35,7 @@ typedef struct etudiant {
     Etudiant *ajout_fin(Etudiant *tete , char nom[] , int age , int moyenne){
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
         if (tete==NULL){
-            tete=Nouvnoeud;
-            return tete;
+            return Nouvnoeud;
         }
     Etudiant *courant=tete;
     while(courant->suivant!=NULL){
@@ -54,6 +53,8 @@ typedef struct etudiant {
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
         if(strcmp(courant->nom,nom)==0){
             Nouvnoeud->suivant=tete;
+            tete->prec=Nouvnoeud;
+            Nouvnoeud->prec=NULL;
             tete=Nouvnoeud;
             return tete;
         }
@@ -66,8 +67,11 @@ typedef struct etudiant {
             return tete;
         }
         else{
-            prec->suivant=Nouvnoeud;
             nouvnoeud->suivant=courant;
+            nouvnoeud->prec=courant->prec;
+            courant->prec->suivant=Nouvnoeud;
+            courant->prec=Nouvnoeud;
+            
         }
         return tete;
     }
@@ -82,13 +86,14 @@ typedef struct etudiant {
         }
         if(!courant){
             printf("le noeud est untrovable \n");
-            return NULL;
+            return tete;
         }
-        if(!courant->suivant)
-            printf("aucun apres a supprimer");
         else{
              Nouvnoeud->suivant=courant->suivant;
+             Nouvnoeud->prec=courant;
              courant->suivant=Nouvnoeud;
+             if(courant->suivant!=NULL)
+             courant->suivant->prec=Nouvnoeud;
         }
         return tete;
     }
