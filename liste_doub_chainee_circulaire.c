@@ -1,17 +1,19 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-/*////listes simplement chainee circulaire////*/
+/*////listes doublement chainee circulaire////*/
 /*creation de la liste*/
 typedef struct etudiant {
     char nom[10];
     struct etudiant *suivant;
-    /*allocation dynamiqeu de le neau*/
+    struct etudiant *prec;
 }Etudiant;
+/*allocation dynamiqeu de le neau*/
     Etudiant *cree_etud(char nom[]){
         Etudiant *etud=malloc(sizeof(Etudiant));
         strcpy(etud->nom,nom);
-        etud->suivant=NULL;
+        etud->suivant=etud;
+        etud->prec=etud;
     return etud;
 }
     /*ajout ou debut*/
@@ -19,27 +21,28 @@ typedef struct etudiant {
     Etudiant *ajout_debut(Etudiant *tete , char nom[]){
         Etudiant *nouvu=cree_etud(nom);
         if(tete==NULL){
-            nouvu->suivant=nouvu;
-            return nouvu;
+            tete=nouvu;
+            return tete;
         }
-        Etudiant *courant=tete;
-        while(courant->suivant!=tete)
-            courant=courant->suivant;
+        Etudiant *dernier=tete->prec;
         nouvu->suivant=tete;
-        courant->suivant=nouvu;
-        return nouvu;
+        nouvu->prec=dernier;
+        dernier->suivant=nouvu;
+        tete->prec=nouvu;
+        tete=nouvu;
+        return tete;
     }
     Etudiant *ajout_fin(Etudiant *tete , char nom[]){
         Etudiant *nouvu=cree_etud(nom);
         if(tete==NULL){
-            nouvu->suivant=nouvu;
-            return nouvu;
+            tete=nouvu;
+            return tete;
         }
-        Etudiant *courant=tete;
-        while(courant->suivant!=tete)
-            courant=courant->suivant;
-        courant->suivant=nouvu;
+        Etudiant *dernier=tete->prec;
         nouvu->suivant=tete;
+        nouvu->prec=dernier;
+        dernier->suivant=nouvu;
+        tete->prec=nouvu;
         return tete;
     }
     Etudiant *suppdebut(Etudiant *tete){
@@ -51,12 +54,10 @@ typedef struct etudiant {
             free(tete);
             return NULL;
         }
-        Etudiant *courant=tete;
-        while(courant->suivant!=tete){
-            courant=courant->suivant;
-        }
+        Etudiant *dernier=tete->prec;
         Etudiant *nouvtete=tete->suivant;
-        courant->suivant=nouvtete;
+        dernier->suivant=nouvtete;
+        nouvtete->prec=dernier;
         free(tete);
         return nouvtete;
     }
@@ -69,14 +70,11 @@ typedef struct etudiant {
             free(tete);
             return NULL;
         }
-        Etudiant *prec=tete;
-        Etudiant *courant=tete->suivant;
-        while(courant->suivant!=tete){
-            prec=courant;
-            courant=courant->suivant;
-        }
-        prec->suivant=tete;
-        free(courant);
+        Etudiant *dernier=tete->prec;
+        Etudiant *avantdernier=dernier->prec;
+        avantdernier->suivant=tete;
+        tete->prec=avantdernier;
+        free(dernier);
         return tete;
     }
     void affichage (Etudiant *tete){

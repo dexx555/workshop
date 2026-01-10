@@ -10,8 +10,8 @@ typedef struct etudiant {
     int moyenne;
     struct etudiant *suivant;
     struct etudiant *prec;
-    /*allocation dynamiqeu de le neau*/
 }Etudiant;
+/*allocation dynamiqeu de le neau*/
     Etudiant *cree_etud (char nom[] , int age , int moyenne){
         Etudiant *nouvu=malloc(sizeof(Etudiant));
         strcpy(nouvu->nom,nom);
