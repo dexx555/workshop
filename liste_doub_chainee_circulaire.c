@@ -77,6 +77,31 @@ typedef struct etudiant {
         free(dernier);
         return tete;
     }
+    Etudiant *supp_node_donne(Etudiant *tete ,char nom[] ){
+        if(tete==NULL){
+            printf("la list est vide");
+        return NULL;
+        }
+        Etudiant *courant=tete;
+        do{
+            if(strcmp(courant->nom,nom)==0){
+                if(courant->suivant==courant){
+                    free(courant);
+                    return NULL;
+                }
+            if(courant==tete)
+                    tete=tete->suivant;
+            Etudiant *avant=courant->prec;
+            Etudiant *apres=courant->suivant;
+            avant->suivant=apres;
+            apres->prec=avant;
+            free(courant);
+            return tete;      
+            }
+            courant=courant->suivant;
+        }while(courant!=tete);
+        return tete;
+    }
     void affichage (Etudiant *tete){
         Etudiant *courant=tete;
         do{
