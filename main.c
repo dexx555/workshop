@@ -51,6 +51,7 @@ typedef struct etudiant {
             return tete;
         }
         Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
+         Etudiant *courant=tete->suivant;
         if(strcmp(courant->nom,nom)==0){
             Nouvnoeud->suivant=tete;
             tete->prec=Nouvnoeud;
@@ -58,7 +59,7 @@ typedef struct etudiant {
             tete=Nouvnoeud;
             return tete;
         }
-        Etudiant *courant=tete->suivant;
+        courant=tete->suivant;
         while(courant && strcmp(courant->nom,nom)!=0){
             courant=courant->suivant;
         }
@@ -67,15 +68,16 @@ typedef struct etudiant {
             return tete;
         }
         else{
-            nouvnoeud->suivant=courant;
-            nouvnoeud->prec=courant->prec;
+            Nouvnoeud->suivant=courant;
+            Nouvnoeud->prec=courant->prec;
             courant->prec->suivant=Nouvnoeud;
             courant->prec=Nouvnoeud;
-            
+
         }
         return tete;
     }
     Etudiant *ajout_apre_node(Etudiant *tete , char nom[] , int age , int moyenne){
+        Etudiant *Nouvnoeud=cree_etud(nom,age , moyenne);
          if(tete==NULL){
         printf("aucun apres a ajute");
         return tete;
@@ -93,7 +95,7 @@ typedef struct etudiant {
              Nouvnoeud->prec=courant;
              courant->suivant=Nouvnoeud;
              if(courant->suivant!=NULL)
-             courant->suivant->prec=Nouvnoeud;
+                courant->suivant->prec=Nouvnoeud;
         }
         return tete;
     }
@@ -320,44 +322,44 @@ int main(){
                 else
                     printf("le nom de etudiant est untrovable \n ");
             break;
-     case 4:
+     case 6:
              tete=suppfin(tete);
             break;
-     case 5:
+     case 7:
              tete=suppdebut(tete);
             break;
-     case 6:
+     case 8:
              printf("entre le nom de etudient a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
              tete=supp_un_noeud(tete , nom_);
             break;
-     case 7:
+     case 9:
              printf("entre le nom de etudient avant a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
              tete=supp_avant_noeud(tete , nom_);
             break;
-     case 8:
+     case 10:
              printf("entre le nom de etudient avant a supprimer :");
              fgets(nom_,50,stdin);
              nom_[strcspn(nom_,"\n")]=0;
              tete=supp_apres_noeud(tete , nom_);
             break;
-     case 9:
+     case 11:
              affichage(tete);
             break;
-     case 10:
+     case 12:
                 int tail=taill(tete);
              printf("la taille de la list est %d\n ",tail);
             break;
-     case 11:
+     case 13:
              printf("====arrivederci55====");
             break;
      default:
              printf("le choix est incorrect");
          }
-    }while(c!=11);
+    }while(c!=13);
 
     return 0;
 }
