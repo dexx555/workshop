@@ -1,31 +1,13 @@
 #include <iostream>
 using namespace std;
-class operation {
-    protected:
-     int a, b;
-    public:
-        operation(int x ,int y) : a(x) , b(y){}
-        virtual void executer(){
-        cout << "operation inconnue" << endl;
-    }
-};
-class addition : public operation {
-public:
-    addition(int x ,int y) : operation(x,y){}
-    void executer(){
-        cout << "x + y = " << a+b << endl;
-    }
-};
-class multiplication : public operation {
-    public:
-    multiplication(int x ,int y) : operation(x,y){}
-    void executer(){
-        cout << "x1 * y2" << a*b << endl;
-    }
-};
+template <typename T>
+void any(T val){
+    cout << val<< endl;
+}
 int main() {
-  operation* x = new addition(2,3);
-  x->executer();
+    any(5);
+    any("hiiiiiiii");
+    any(5.23);
     return 0;
 }
 
@@ -35,4 +17,27 @@ int main() {
  /*cin == console input*/
  /*cerr == console error output*/
  /* const complexe& ==  */
+ /*template == allows us to create functions and classes that can work with any data type. 
+  It is a powerful feature of C++ that enables us to write generic programming code.
+  template <typename T>
+void any(T val){
+    cout << val<< endl;
+}
+int main() {
+    any(5);
+    any("hiiiiiiii");
+    any(5.23);
+    return 0;
+} 
+  In the example above, we have defined a template function called "any" that takes a parameter of type T. 
+  This means that we can call this function with any data type, such as int, float, or string, and it will work correctly.*/
+  /*const int* a == This is a pointer to a constant integer. 
+  It means that the value pointed to by the pointer cannot be modified through that pointer
+   but the pointer itself can point to different integers.*/
+   /* int* const* a == This is a pointer to a constant pointer. 
+   It means that the pointer itself cannot be modified to point to a different memory location 
+   but the value it points to can be modified.*/
+  /*int fonction() const {} == This is a member function declaration in C++. 
+  The "const" keyword indicates that the function does not modify the state of the object it belongs to.*/
+  
  
