@@ -49,3 +49,21 @@ for i in range(len(n)):
         distinct.append(n[i])
 print("6) liste contenant les valeurs distinctes dans lordre de leur première apparition. :")
 print(distinct)  
+frequence = {}
+for i in range(len(n)):
+    cmp=0
+    for j in range(len(n)):
+        if n[i]==n[j]:
+            cmp+=1
+    if(cmp >= 2):
+        frequence[n[i]]=cmp
+    else:
+        frequence[n[i]]=1
+print("6)fréquence dapparition de chaque valeur sous la forme dun dictionnaire : ")               
+print(frequence)        
+max_fréquente=0
+for i in frequence.values():
+    if(i >= max_fréquente):
+        max_fréquente = frequence.items()
+print("la valeur la plus fréquente ainsi que sa fréquence.")
+print(max_fréquente)    
