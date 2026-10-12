@@ -1,3 +1,4 @@
+    #exercice 1 TD1
 n = [17, -4, 23, 17, 8, 42, -9, 15, 23, 8, 31, 42, 5, -4, 19]
 positive=[]
 for i in range(len(n)):
@@ -59,11 +60,48 @@ for i in range(len(n)):
         frequence[n[i]]=cmp
     else:
         frequence[n[i]]=1
-print("6)fréquence dapparition de chaque valeur sous la forme dun dictionnaire : ")               
+print("7) fréquence dapparition de chaque valeur sous la forme dun dictionnaire : ")               
 print(frequence)        
-max_fréquente=0
-for i in frequence.values():
-    if(i >= max_fréquente):
-        max_fréquente = frequence.items()
-print("la valeur la plus fréquente ainsi que sa fréquence.")
-print(max_fréquente)    
+max_fréquente_value=None
+max_fréquente_key=0
+for i,j in frequence.items():
+    if(j >= max_fréquente_key):
+        max_fréquente_value = j
+        max_fréquente_key = i
+print("8) la valeur la plus fréquente ainsi que sa fréquence.")
+print(max_fréquente_value) 
+print(max_fréquente_key) 
+equal_frequence = {}
+for i, j in frequence.items():
+    if j == max_fréquente_value:
+            equal_frequence[i] = j
+print("9) ")
+print(equal_frequence)
+#Q10 a returne
+
+
+    #exercice 2 TD1
+
+controle1 = [12, 15, 17, 9, 14, 18, 11, 15]
+controle2 = [14, 13, 17, 10, 16, 18, 11, 12]
+controle3 = [15, 14, 18, 8, 17, 16, 13, 15]
+notes = []
+notes.extend(controle1 + controle2 + controle3)
+print("1) une liste contenant l’ensemble des notes obtenues aux trois contrôles. :")
+print(notes)
+diff_notes = set()
+diff_notes.update(controle1 , controle2 , controle3)
+print("2) un ensemble contenant toutes les notes différentes. :")
+print(diff_notes)
+comm_notes = []
+for i in range(len(controle1)):
+    if controle1[i] in controle2 and controle1[i] in controle3:
+        comm_notes.append(controle1[i])
+print("3) les notes communes aux trois contrôles. :")
+print(comm_notes)  
+unique_controle1_notes = []      
+for i in range(len(controle1)):
+    if controle1[i] not in controle2 and controle1[i] not in controle3:
+       unique_controle1_notes.append(controle1[i])
+print("3) les notes présentes dans le premier contrôle mais absentes des deux autres. :")
+print(unique_controle1_notes)        
